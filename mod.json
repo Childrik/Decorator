@@ -1,0 +1,103 @@
+{
+	"geode": "v5.0.0",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"id": "asterlands.auto-decor",
+	"name": "Auto Decor",
+	"version": "v1.0.0",
+	"developer": "AsterLands",
+	"description": "Select blocks, press Decor: get an ornate decoration (frames, spires, dotted lines, glow streaks). Endless seeded variations.",
+	"tags": ["editor", "utility"],
+	"settings": {
+		"title-gen": { "type": "title", "name": "Generation" },
+		"style": {
+			"type": "string",
+			"name": "Style",
+			"description": "Overall look. Chaos picks a random base style and adds extras.",
+			"default": "gate",
+			"one-of": ["gate", "circuit", "spiky", "minimal", "chaos"]
+		},
+		"detail": {
+			"type": "int",
+			"name": "Detail",
+			"description": "How many frames, streaks and traces are generated.",
+			"default": 6, "min": 1, "max": 10,
+			"control": { "slider": true }
+		},
+		"thickness": {
+			"type": "float",
+			"name": "Line thickness",
+			"description": "Base line thickness in editor units (a block is 30).",
+			"default": 2.5, "min": 1, "max": 8,
+			"control": { "slider": true }
+		},
+		"seed": {
+			"type": "int",
+			"name": "Seed",
+			"description": "0 = new random seed on every press. Any other value always gives the same result. The seed used is shown after each generation.",
+			"default": 0, "min": 0, "max": 2147483647
+		},
+		"max-pieces": {
+			"type": "int",
+			"name": "Max objects per generation",
+			"description": "Safety cap so the editor does not lag.",
+			"default": 1500, "min": 100, "max": 20000
+		},
+		"feat-frames":  { "type": "bool", "name": "Nested frames",   "default": true },
+		"feat-spires":  { "type": "bool", "name": "Spires / spikes", "default": true },
+		"feat-dots":    { "type": "bool", "name": "Dotted lines",    "default": true },
+		"feat-streaks": { "type": "bool", "name": "Glow streaks",    "default": true },
+
+		"title-obj": { "type": "title", "name": "Objects and colors" },
+		"piece-id": {
+			"type": "int",
+			"name": "Piece object ID",
+			"description": "Every line, dot and triangle is this ONE object, stretched and rotated. Use a NON-solid square (e.g. from the Outline tab). Easiest: select one such object in the editor and press 'Pal'.",
+			"default": 1, "min": 1, "max": 99999
+		},
+		"no-touch": {
+			"type": "bool",
+			"name": "Set 'No Touch' on pieces",
+			"description": "Extra safety for solid piece IDs. Always playtest after generating.",
+			"default": true
+		},
+		"color-main": {
+			"type": "int",
+			"name": "Main color channel",
+			"description": "Lines, dots, spires. 1011 = built-in White.",
+			"default": 1011, "min": 0, "max": 1012
+		},
+		"color-accent": {
+			"type": "int",
+			"name": "Accent color channel",
+			"description": "Accent lines and glow (when no fade channels are set).",
+			"default": 1, "min": 0, "max": 1012
+		},
+		"fade-channels": {
+			"type": "string",
+			"name": "Glow fade channels",
+			"description": "Comma separated color channel IDs from brightest to dimmest, e.g. 11,12,13,14. Make them the same purple with decreasing opacity. Empty = accent channel only.",
+			"default": ""
+		},
+		"fade-steps": {
+			"type": "int",
+			"name": "Glow fade steps",
+			"description": "How many brightness levels a streak is split into (match the number of fade channels).",
+			"default": 4, "min": 1, "max": 8
+		},
+		"editor-layer": {
+			"type": "int",
+			"name": "Editor layer for decor",
+			"description": "0 = leave as is. Otherwise generated objects go to this editor layer, so you can hide or lock them.",
+			"default": 0, "min": 0, "max": 99
+		},
+
+		"title-ui": { "type": "title", "name": "Panel position" },
+		"ui-x": { "type": "int", "name": "Panel X", "description": "Pixels from the left edge.", "default": 40, "min": 0, "max": 1000 },
+		"ui-y": { "type": "int", "name": "Panel Y", "description": "Pixels from the bottom edge (top button).", "default": 215, "min": 0, "max": 700 }
+	}
+}

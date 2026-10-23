@@ -1,0 +1,33 @@
+name: Auto Decor Build
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/**"
+      - "mod.json"
+      - "CMakeLists.txt"
+      - ".github/workflows/build.yml"
+
+jobs:
+  build:
+    name: Build Auto Decor
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v4
+
+      - name: Setup Geode SDK
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          sdk: "nightly"
+
+      - name: Upload mod artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Auto-Decor
+          path: |
+            build/**/*.geode
+            build/*.geode
+          if-no-files-found: warn
